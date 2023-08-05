@@ -8,7 +8,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public")); // Static dosyalarin konumunu belirledik
 // SCHEMA/KOLEKSIYON/DEFAULT DOCUMENT OLUSTURMA
 mongoose.connect("mongodb+srv://ademkaya:kayadem16@cluster0.bwb2nci.mongodb.net/todolistDB", {useNewUrlParser: true}); // MongoDB'ye (database) baglanti kurduk ve todoListDB adinda bir database olusturduk.
-
+const port = 3000;
 const itemsSchema = new mongoose.Schema({name: String}) // Yeni bir schema olusturduk degeri String olacak tek bir keyi var.
 
 const Item = mongoose.model("Item", itemsSchema); // Item adli yeni bir model(koleksiyon) olusturduk yukarda olusturdugumuz itemsSchemanin yapisini kullanacagiz.
@@ -97,4 +97,4 @@ app.post("/delete", (req, res) => { // action="/delete" method="post" olan form'
   }
 })
 
-app.listen(3000, function() {console.log("Server started on port 3000");});
+app.listen(process.env.PORT || port, function() {console.log("Server started on port 3000");});
